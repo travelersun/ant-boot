@@ -71,9 +71,12 @@ public class LangApplicationRunListener implements SpringApplicationRunListener 
                 break;
             }
         }
-        Assert.notNull(annotation, "sources中无@AntBootApplication注解");
-        // 设置应用id
-        System.setProperty(Contexts.APP_ID_KEY, annotation.appId());
+        if(annotation != null){
+            Assert.notNull(annotation, "sources中无@AntBootApplication注解");
+            // 设置应用id
+            System.setProperty(Contexts.APP_ID_KEY, annotation.appId());
+        }
+
         // 创建应用home目录（如果不存在）
         FileUtils.createDirIfAbsent(Contexts.getHome());
     }
